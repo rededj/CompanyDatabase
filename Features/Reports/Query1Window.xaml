@@ -1,0 +1,37 @@
+﻿<Window x:Class="BDcource.Features.Reports.Query1Window"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Операции цеха с материалами" Height="400" Width="700" WindowStartupLocation="CenterOwner"
+        Background="{StaticResource BackgroundColor}">
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="Операции цеха с расходными материалами" 
+                   Style="{StaticResource TitleTextBlock}" Margin="0,0,0,10"/>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,10">
+            <TextBlock Text="Выберите цех:" VerticalAlignment="Center" Margin="0,0,5,0" FontFamily="Tahoma" FontSize="12"/>
+            <ComboBox Name="cbWorkshop" DisplayMemberPath="WorkshopName" SelectedValuePath="WorkshopId" 
+                      Width="200" Margin="0,0,10,0" FontFamily="Tahoma" FontSize="12" Height="23"/>
+            <Button Content="Показать" Style="{StaticResource ClassicButton}" Width="80" Click="ShowReport_Click"/>
+        </StackPanel>
+
+        <DataGrid Grid.Row="2" Name="dgResult" IsReadOnly="True"
+                  AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False"
+                  CanUserReorderColumns="False" SelectionMode="Single" RowHeaderWidth="0">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Операция" Binding="{Binding OperationDescription}" Width="*"/>
+                <DataGridTextColumn Header="Материал" Binding="{Binding MaterialName}" Width="*"/>
+                <DataGridTextColumn Header="Требуемое количество" Binding="{Binding RequiredQuantity}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Button Grid.Row="3" Content="Закрыть" Style="{StaticResource ClassicButton}" Width="80" 
+                HorizontalAlignment="Right" Margin="0,15,0,0" Click="Close_Click"/>
+    </Grid>
+</Window>

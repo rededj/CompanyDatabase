@@ -1,0 +1,62 @@
+﻿<Window x:Class="BDcource.Features.ToolIssuanceForms.ToolIssuanceEditDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Выдача инструмента" Height="355" Width="550" 
+        WindowStartupLocation="CenterOwner" ResizeMode="NoResize"
+        Background="{StaticResource BackgroundColor}">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="157"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="Выдача инструмента" 
+                   Style="{StaticResource TitleTextBlock}" Margin="0,0,0,15"/>
+
+        <Label Grid.Row="1" Grid.Column="0" Content="Наряд:" FontFamily="Tahoma" FontSize="12" VerticalAlignment="Center" Height="25"/>
+        <ComboBox Grid.Row="1" Grid.Column="1" Name="cbWorkOrder" 
+          DisplayMemberPath="DisplayName" SelectedValuePath="WorkOrderId" 
+          Margin="0,5,0,5" FontFamily="Tahoma" FontSize="12"/>
+
+        <Label Grid.Row="2" Grid.Column="0" Content="Операция:" FontFamily="Tahoma" FontSize="12" VerticalAlignment="Center" Height="24"/>
+        <ComboBox Grid.Row="2" Grid.Column="1" Name="cbOperation" 
+                  DisplayMemberPath="Description" SelectedValuePath="OperationId" 
+                  Margin="0,5,0,5" FontFamily="Tahoma" FontSize="12"/>
+
+        <Label Grid.Row="3" Grid.Column="0" Content="Инструмент:" 
+               FontFamily="Tahoma" FontSize="12" VerticalAlignment="Center" Height="25"/>
+        <ComboBox Grid.Row="3" Grid.Column="1" Name="cbTool" 
+                  DisplayMemberPath="SerialNumber" SelectedValuePath="SerialNumber" 
+                  Margin="0,5,0,5" FontFamily="Tahoma" FontSize="12"/>
+
+        <Label Grid.Row="4" Grid.Column="0" Content="Цех:" FontFamily="Tahoma" FontSize="12" VerticalAlignment="Center" Height="24"/>
+        <ComboBox Grid.Row="4" Grid.Column="1" Name="cbWorkshop" 
+          DisplayMemberPath="WorkshopName" SelectedValuePath="WorkshopId" 
+          Margin="0,5,0,5" FontFamily="Tahoma" FontSize="12"/>
+
+        <Label Grid.Row="5" Grid.Column="0" Content="Сотрудник:" FontFamily="Tahoma" FontSize="12" VerticalAlignment="Center" Height="25"/>
+        <ComboBox Grid.Row="5" Grid.Column="1" Name="cbUser" 
+                  DisplayMemberPath="Name" SelectedValuePath="UserId" 
+                  Margin="0,5,0,5" FontFamily="Tahoma" FontSize="12"/>
+
+        <Label Grid.Row="6" Grid.Column="0" Content="Плановая дата возврата:" 
+               FontFamily="Tahoma" FontSize="12" VerticalAlignment="Center" Height="25"/>
+        <DatePicker Grid.Row="6" Grid.Column="1" Name="dpPlannedReturnDate" 
+                    SelectedDateFormat="Short" Margin="0,4,0,6" FontFamily="Tahoma" FontSize="12"/>
+
+        <StackPanel Grid.Row="7" Orientation="Horizontal" HorizontalAlignment="Left" Margin="8,15,0,0" Grid.Column="1" Width="180">
+            <Button Name="btnOk" Content="OK" Style="{StaticResource ClassicButton}" Width="80" Margin="5" Click="BtnOk_Click"/>
+            <Button Name="btnCancel" Content="Отмена" Style="{StaticResource ClassicButton}" Width="80" Margin="5" Click="BtnCancel_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

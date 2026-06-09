@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="BDcource.Features.ToolIssuanceForms.ToolIssuanceControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Список выдач инструментов" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
+        <DataGrid Grid.Row="1" Name="dgIssuances" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single"
+                  CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Наряд" Binding="{Binding WorkOrder.Product.Name}" Width="*"/>
+                <DataGridTextColumn Header="Операция" Binding="{Binding Operation.Description}" Width="*"/>
+                <DataGridTextColumn Header="Инструмент" Binding="{Binding SerialNumber}" Width="*"/>
+                <DataGridTextColumn Header="Тип" Binding="{Binding SerialNumberNavigation.ToolType.Name}" Width="*"/>
+                <DataGridTextColumn Header="Цех" Binding="{Binding Workshop.WorkshopName}" Width="*"/>
+                <DataGridTextColumn Header="Сотрудник" Binding="{Binding User.Name}" Width="*"/>
+                <DataGridTextColumn Header="Дата выдачи" Binding="{Binding IssueDateTime, StringFormat=dd.MM.yyyy}" Width="*"/>
+                <DataGridTextColumn Header="План. возврат" Binding="{Binding ReturnDateTime, StringFormat=dd.MM.yyyy}" Width="*"/>
+                <DataGridTextColumn Header="Факт. возврат" Binding="{Binding ActualReturnDate, StringFormat=dd.MM.yyyy}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+            <Button Name="btnAdd" Content="Выдать инструмент" Width="140" Margin="5" Click="BtnAdd_Click" Style="{StaticResource ClassicButton}"/>
+            <Button Name="btnEdit" Content="Редактировать" Width="120" Margin="5" Click="BtnEdit_Click" Style="{StaticResource ClassicButton}"/>
+            <Button Name="btnReturn" Content="Вернуть" Width="80" Margin="5" Click="BtnReturn_Click" Style="{StaticResource ClassicButton}"/>
+            <Button Name="btnDelete" Content="Удалить" Width="80" Margin="5" Click="BtnDelete_Click" Style="{StaticResource ClassicButton}"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

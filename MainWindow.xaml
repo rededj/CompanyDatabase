@@ -1,0 +1,97 @@
+﻿<Window x:Class="BDcource.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:issuanceMat="clr-namespace:BDcource.Features.MaterialIssuanceForms"
+        xmlns:issuanceTool="clr-namespace:BDcource.Features.ToolIssuanceForms"
+        xmlns:users="clr-namespace:BDcource.Features.Users"
+        Title="Главная страница" Height="550" Width="800" 
+        WindowStartupLocation="CenterScreen" ResizeMode="CanResize"
+        Background="{StaticResource BackgroundColor}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Background="{StaticResource PrimaryColor}" Padding="5">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <TextBlock Text="Пользователь: " FontWeight="Bold" Foreground="White" FontFamily="Tahoma" FontSize="12" VerticalAlignment="Center"/>
+                <TextBlock Name="txtUserLogin" Margin="5,0,20,0" Foreground="White" FontFamily="Tahoma" FontSize="12" VerticalAlignment="Center"/>
+                <TextBlock Text="Роль: " FontWeight="Bold" Foreground="White" FontFamily="Tahoma" FontSize="12" VerticalAlignment="Center"/>
+                <TextBlock Name="txtUserRole" Margin="5,0,20,0" Foreground="White" FontFamily="Tahoma" FontSize="12" VerticalAlignment="Center"/>
+                <Button Name="btnLogout" Content="Выйти" Style="{StaticResource ClassicButton}" Width="80" Height="28" Click="Logout_Click" Background="#FF5A1584"/>
+            </StackPanel>
+        </Border>
+
+        <TabControl Grid.Row="1" Name="mainTabControl" Margin="5" Background="White">
+            <TabItem Name="tabDirectories" Header="Справочники">
+                <StackPanel Margin="15">
+                    <TextBlock Style="{StaticResource TitleTextBlock}"><Run Text="Справочники "/><Run Language="ru-ru" Text="фирмы"/></TextBlock>
+                    <WrapPanel>
+                        <Button Name="btnProducts" Content="Продукты" Style="{StaticResource ClassicButton}" Width="140" Margin="5" Click="BtnProducts_Click"/>
+                        <Button Name="btnWorkshops" Content="Цеха" Style="{StaticResource ClassicButton}" Width="140" Margin="5" Click="BtnWorkshops_Click"/>
+                        <Button Name="btnOperations" Content="Операции" Style="{StaticResource ClassicButton}" Width="140" Margin="5" Click="BtnOperations_Click"/>
+                        <Button Name="btnMaterials" Content="Материалы" Style="{StaticResource ClassicButton}" Width="140" Margin="5" Click="BtnMaterials_Click"/>
+                        <Button Name="btnToolTypes" Content="Типы инструментов" Style="{StaticResource ClassicButton}" Width="140" Margin="5" Click="BtnToolTypes_Click"/>
+                        <Button Name="btnTools" Content="Инструменты" Style="{StaticResource ClassicButton}" Width="140" Margin="5" Click="BtnTools_Click"/>
+                        <Button Name="btnWorkOrders" Content="Наряды" Style="{StaticResource ClassicButton}" Width="140" Margin="5" Click="BtnWorkOrders_Click"/>
+                        <Button Name="btnBlueprints" Content="Чертежи" Style="{StaticResource ClassicButton}" Width="140" Margin="5" Click="BtnBlueprints_Click"/>
+                    </WrapPanel>
+                </StackPanel>
+            </TabItem>
+
+            <TabItem Header="Запросы">
+                <ScrollViewer>
+                    <StackPanel Margin="15">
+                        <TextBlock Text="Аналитические запросы" Style="{StaticResource TitleTextBlock}"/>
+                        <WrapPanel>
+                            <Button Content="1. Операции цеха и материалы" Style="{StaticResource ClassicButton}" Width="320" Margin="5" Click="Query1_Click"/>
+                            <Button Content="2. Инструменты" Style="{StaticResource ClassicButton}" Width="320" Margin="5" Click="Query2_Click"/>
+                            <Button Content="3. Инструменты по частоте" Style="{StaticResource ClassicButton}" Width="320" Margin="5" Click="Query3_Click"/>
+                            <Button Content="4. Наряды с инструментами" Style="{StaticResource ClassicButton}" Width="320" Margin="5" Click="Query4_Click"/>
+                            <Button Content="5. Операции" Style="{StaticResource ClassicButton}" Width="320" Margin="5" Click="Query5_Click"/>
+                            <Button Content="6. Материалы по использованию" Style="{StaticResource ClassicButton}" Width="320" Margin="5" Click="Query6_Click"/>
+                            <Button Content="7. Товары и инструменты" Style="{StaticResource ClassicButton}" Width="320" Margin="5" Click="Query7_Click"/>
+                            <Button Content="8. Наряды " Style="{StaticResource ClassicButton}" Width="320" Margin="5" Click="Query8_Click"/>
+                            <Button Content="9. Отчёт о производстве по цехам" Style="{StaticResource ClassicButton}" Width="320" Margin="5" Click="Query9_Click"/>
+                        </WrapPanel>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <TabItem Header="Отчёты">
+                <StackPanel Margin="15">
+                    <TextBlock Text="Месячный отчёт о работе фирмы" Style="{StaticResource TitleTextBlock}"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,15">
+                        <TextBlock Text="Месяц:" VerticalAlignment="Center" Margin="0,0,5,0" FontFamily="Tahoma"/>
+                        <ComboBox Name="cbMonth" Width="120" Margin="0,0,10,0" FontFamily="Tahoma" VerticalContentAlignment="Center"/>
+                        <TextBlock Text="Год:" VerticalAlignment="Center" Margin="0,0,5,0" FontFamily="Tahoma"/>
+                        <ComboBox Name="cbYear" Width="80" Margin="0,0,10,0" FontFamily="Tahoma" VerticalContentAlignment="Center"/>
+                        <Button Content="Сформировать" Style="{StaticResource ClassicButton}" Click="GenerateMonthlyReport_Click" Width="120"/>
+                    </StackPanel>
+                    <DataGrid Name="dgMonthlyReport" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Продукт" Binding="{Binding ProductName}" Width="*"/>
+                            <DataGridTextColumn Header="Показатель" Binding="{Binding IndicatorName}" Width="*"/>
+                            <DataGridTextColumn Header="Количество" Binding="{Binding Quantity}" Width="*"/>
+                            <DataGridTextColumn Header="Ед. изм." Binding="{Binding Unit}" Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </TabItem>
+
+            <TabItem Header="Выдача материалов">
+                <issuanceMat:MaterialIssuanceControl Loaded="MaterialIssuanceControl_Loaded"/>
+            </TabItem>
+
+            <TabItem Header="Выдача инструментов">
+                <issuanceTool:ToolIssuanceControl Loaded="ToolIssuanceControl_Loaded"/>
+            </TabItem>
+
+            <TabItem Name="tabUsers" Header="Пользователи" Visibility="Visible">
+                <users:UserManagementControl/>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

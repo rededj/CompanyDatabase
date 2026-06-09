@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="BDcource.Features.Users.UserManagementControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Список пользователей" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
+        <DataGrid Grid.Row="1" Name="dgUsers" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single"
+                  CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Логин" Binding="{Binding Login}" Width="*"/>
+                <DataGridTextColumn Header="Роль" Binding="{Binding Role.RoleName}" Width="*"/>
+                <DataGridTextColumn Header="ФИО" Binding="{Binding Name}" Width="2*"/>
+                <DataGridTextColumn Header="Должность" Binding="{Binding Position}" Width="*"/>
+                <DataGridTextColumn Header="Цех" Binding="{Binding WorkshopName}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+            <Button Name="btnAdd" Content="Добавить" Width="80" Margin="5" Click="BtnAdd_Click" Style="{StaticResource ClassicButton}"/>
+            <Button Name="btnEdit" Content="Редактировать" Width="120" Margin="5" Click="BtnEdit_Click" Style="{StaticResource ClassicButton}"/>
+            <Button Name="btnDelete" Content="Удалить" Width="80" Margin="5" Click="BtnDelete_Click" Style="{StaticResource ClassicButton}"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

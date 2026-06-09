@@ -1,0 +1,92 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="BDcource.Features.Operations.OperationEditDialog"
+        Title="Операция" Height="500" Width="700" WindowStartupLocation="CenterOwner"
+        ResizeMode="CanResize" Background="{StaticResource BackgroundColor}">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <GroupBox Header="Основная информация" Grid.Row="0" Margin="0,0,0,10">
+            <Grid Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0" Content="Описание:" FontFamily="Tahoma" FontSize="12"/>
+                <TextBox Grid.Row="0" Grid.Column="1" x:Name="txtDescription" Margin="0,5,0,5" FontFamily="Tahoma" FontSize="12"/>
+
+                <Label Grid.Row="1" Grid.Column="0" Content="Ср. длительность:" FontFamily="Tahoma" FontSize="12"/>
+                <TextBox Grid.Row="1" Grid.Column="1" x:Name="txtAverageDuration" Margin="0,5,0,5" ToolTip="ЧЧ:ММ" FontFamily="Tahoma" FontSize="12"/>
+
+                <Label Grid.Row="2" Grid.Column="0" Content="Цех:" FontFamily="Tahoma" FontSize="12"/>
+                <ComboBox Grid.Row="2" Grid.Column="1" x:Name="cbWorkshop" DisplayMemberPath="WorkshopName" SelectedValuePath="WorkshopId" Margin="0,5,0,5" FontFamily="Tahoma" FontSize="12"/>
+
+                <Label Grid.Row="3" Grid.Column="0" Content="Чертёж:" FontFamily="Tahoma" FontSize="12"/>
+                <ComboBox Grid.Row="3" Grid.Column="1" x:Name="cbBlueprint" DisplayMemberPath="BlueprintNumber" SelectedValuePath="BlueprintNumber" Margin="0,5,0,5" FontFamily="Tahoma" FontSize="12"/>
+            </Grid>
+        </GroupBox>
+
+        <TabControl Grid.Row="1" x:Name="tabNorms" Margin="0,0,0,10">
+            <TabItem Header="Материалы (нормативы)">
+                <Grid Margin="5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <DataGrid Grid.Row="0" x:Name="dgMaterials" IsReadOnly="True"
+                              AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False"
+                              CanUserReorderColumns="False" SelectionMode="Single" Margin="0,0,0,10" RowHeaderWidth="0">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Материал" Binding="{Binding Material.Name}" Width="*"/>
+                            <DataGridTextColumn Header="Требуемое количество" Binding="{Binding RequiredQuantity}" Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,5">
+                        <Button x:Name="btnAddMaterial" Content="Добавить" Style="{StaticResource ClassicButton}" Width="80" Margin="5" Click="BtnAddMaterial_Click"/>
+                        <Button x:Name="btnEditMaterial" Content="Редактировать" Style="{StaticResource ClassicButton}" Width="120" Margin="5" Click="BtnEditMaterial_Click"/>
+                        <Button x:Name="btnDeleteMaterial" Content="Удалить" Style="{StaticResource ClassicButton}" Width="80" Margin="5" Click="BtnDeleteMaterial_Click"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Инструменты (нормативы)">
+                <Grid Margin="5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <DataGrid Grid.Row="0" x:Name="dgTools" IsReadOnly="True"
+                              AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False"
+                              CanUserReorderColumns="False" SelectionMode="Single" Margin="0,0,0,10" RowHeaderWidth="0">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Тип инструмента" Binding="{Binding ToolType.Name}" Width="*"/>
+                            <DataGridTextColumn Header="Количество" Binding="{Binding QuantityInUse}" Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,5">
+                        <Button x:Name="btnAddTool" Content="Добавить" Style="{StaticResource ClassicButton}" Width="80" Margin="5" Click="BtnAddTool_Click"/>
+                        <Button x:Name="btnEditTool" Content="Редактировать" Style="{StaticResource ClassicButton}" Width="120" Margin="5" Click="BtnEditTool_Click"/>
+                        <Button x:Name="btnDeleteTool" Content="Удалить" Style="{StaticResource ClassicButton}" Width="80" Margin="5" Click="BtnDeleteTool_Click"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
+            <Button x:Name="btnOk" Content="OK" Style="{StaticResource ClassicButton}" Width="80" Margin="5" Click="BtnOk_Click"/>
+            <Button x:Name="btnCancel" Content="Отмена" Style="{StaticResource ClassicButton}" Width="80" Margin="5" Click="BtnCancel_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
